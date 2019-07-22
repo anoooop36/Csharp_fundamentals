@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>AddFunctionality.Anoop</id>
+    <version>1.0.0</version>
+    <title>AddFunctionality</title>
+    <authors>Anoop</authors>
+    <owners>Anoop</owners>
+    <!--<licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
+    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
+    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Awesome application adding utility</description>
+    <releaseNotes>First Release</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>Add Adder</tags>
+  </metadata>
+  <!-- Insert below <metadata> element -->
+  <files>
+    <file src="bin\Release\CreateNuGetPackages.dll" target="lib\net46\CreateNuGetPackages.dll" />
+    <file src="bin\Release\CreateNuGetPackages.xml" target="lib\net46\CreateNuGetPackages.xml" />
+  </files>
+</package>
