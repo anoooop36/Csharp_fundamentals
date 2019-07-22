@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeService", "WebApplicationAsp.net\EmployeeService.csproj", "{1E43619D-E752-4DD1-849D-E9D0BE1F5499}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeDataAccess", "EmployeeDataAccess\EmployeeDataAccess.csproj", "{B1CC25B5-3090-4E75-9126-34D83473E581}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E43619D-E752-4DD1-849D-E9D0BE1F5499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E43619D-E752-4DD1-849D-E9D0BE1F5499}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E43619D-E752-4DD1-849D-E9D0BE1F5499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E43619D-E752-4DD1-849D-E9D0BE1F5499}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1CC25B5-3090-4E75-9126-34D83473E581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1CC25B5-3090-4E75-9126-34D83473E581}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1CC25B5-3090-4E75-9126-34D83473E581}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1CC25B5-3090-4E75-9126-34D83473E581}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7A5B12D7-5831-45FD-9ED5-E7865CD3FECD}
+	EndGlobalSection
+EndGlobal
