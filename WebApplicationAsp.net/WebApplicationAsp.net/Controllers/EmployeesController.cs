@@ -4,10 +4,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using EmployeeDataAccess;
 
 namespace WebApplicationAsp.net.Controllers
 {
+    [EnableCorsAttribute("*","*","*")]
     public class EmployeesController : ApiController
     {
         //HttpGet attribute to map method to Get verb
@@ -32,6 +34,7 @@ namespace WebApplicationAsp.net.Controllers
         }
 
         // Get prefix methods would be mapped to Get verb
+        [DisableCors]
         public HttpResponseMessage GetEmployeeById(int id)
         {
             using (EmployeeDBEntities entities = new EmployeeDBEntities())
