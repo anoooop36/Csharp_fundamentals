@@ -12,11 +12,22 @@ namespace WebApplicationAsp.net.Controllers
     {
         //HttpGet attribute to map method to Get verb
         [HttpGet]
-        public IEnumerable<Employee> LoadAllEmployees()
+        public HttpResponseMessage LoadAllEmployees(string gender="All")
         {
             using (EmployeeDBEntities entities = new EmployeeDBEntities())
             {
-                return entities.Employees.ToList();
+                switch (gender.ToLower())
+                {
+                    case "all":
+                        return Request.CreateResponse(HttpStatusCode.OK, entities.Employees.ToList());
+                    case "male":
+                        return Request.CreateResponse(HttpStatusCode.OK,entities.Employees.Where(e=> e.Gender.ToLower() == "male").ToList());
+                    case "female":
+                        return Request.CreateResponse(HttpStatusCode.OK, entities.Employees.Where(e => e.Gender.ToLower() == "female").ToList());
+                    default:
+                        return Request.CreateErrorResponse(HttpStatusCode.BadRequest,
+                            "Value for gender must be male, female, all");
+                }
             }
         }
 
