@@ -10,7 +10,9 @@ namespace WebApplicationAsp.net.Controllers
 {
     public class EmployeesController : ApiController
     {
-        public IEnumerable<Employee> Get()
+        //HttpGet attribute to map method to Get verb
+        [HttpGet]
+        public IEnumerable<Employee> LoadAllEmployees()
         {
             using (EmployeeDBEntities entities = new EmployeeDBEntities())
             {
@@ -18,7 +20,8 @@ namespace WebApplicationAsp.net.Controllers
             }
         }
 
-        public HttpResponseMessage Get(int id)
+        // Get prefix methods would be mapped to Get verb
+        public HttpResponseMessage GetEmployeeById(int id)
         {
             using (EmployeeDBEntities entities = new EmployeeDBEntities())
             {
