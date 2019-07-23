@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using WebApiContrib.Formatting.Jsonp;
 
 namespace WebApplicationAsp.net
 {
@@ -38,7 +39,9 @@ namespace WebApplicationAsp.net
             //config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             ////config.Formatters.Remove(config.Formatters.JsonFormatter);
             //config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/html"));
-            config.Formatters.Add(new CustomJsonFormatter());
+            //config.Formatters.Add(new CustomJsonFormatter());
+            var jsonpFormatter = new JsonpMediaTypeFormatter(config.Formatters.JsonFormatter);
+            config.Formatters.Insert(0,jsonpFormatter);
         }
     }
 }
