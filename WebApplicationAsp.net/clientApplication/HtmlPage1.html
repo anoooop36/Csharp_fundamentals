@@ -8,7 +8,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var ulEmployees = $('#ulEmployees');
-            $('#btn').click(function() {
+            $('#btn').click(function () {
                 $.ajax({
                     type: 'GET',
                     url: 'https://localhost:44387/api/employees',
@@ -17,7 +17,7 @@
                         ulEmployees.empty();
                         $.each(data, function (index, val) {
                             var fullName = val.FirstName + ' ' + val.LastName;
-                            ulEmployees.append('<li>'+fullName+'</li>');
+                            ulEmployees.append('<li>' + fullName + '</li>');
                         });
                     }
                 });
@@ -25,10 +25,39 @@
             $('#btnClear').click(function () {
                 ulEmployees.empty();
             });
+            $('#btnAuth').click(function () {
+                var username = $('#userName').val();
+                var password = $('#password').val();
+                $.ajax({
+                    type: 'GET',
+                    url: 'https://localhost:44387/api/employees',
+                    dataType: 'json',
+                    headers: {
+                        'Authorization': 'Basic ' + btoa(username + ':' + password)
+                    },
+                    success: function (data) {
+                        ulEmployees.empty();
+                        $.each(data, function (index, val) {
+                            var fullName = val.FirstName + ' ' + val.LastName;
+                            ulEmployees.append('<li>' + fullName + '</li>');
+                        });
+                    },
+                    complete: function (jqXHR) {
+                        if (jqXHR.status == '401') {
+                            ulEmployees.empty();
+                            ulEmployees.append('<li>' + jqXHR.status + ':' + jqXHR.statusText + '</li>')
+                        }
+                    }
+                });
+            });
         });
     </script>
 </head>
 <body>
+    Username: <input type="text" id="userName" value="" />
+    Password: <input type="text" id="password" value="" />
+    <br />
+    <input id="btnAuth" type="button" value="Authenticate and get employees" />
     <input id="btn" type="button" value="Get all employees" />
     <input id="btnClear" type="button" value="clear" />
     <ul id="ulEmployees"></ul>

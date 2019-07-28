@@ -43,8 +43,8 @@ namespace WebApplicationAsp.net
             //config.Formatters.Add(new CustomJsonFormatter());
             //var jsonpFormatter = new JsonpMediaTypeFormatter(config.Formatters.JsonFormatter);
             //config.Formatters.Insert(0,jsonpFormatter);
-            //EnableCorsAttribute cors = new EnableCorsAttribute("*","*","*");
-            //config.EnableCors(cors);
+            EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
             config.Filters.Add(new RequireHttpsAttribute());
             config.Filters.Add(new BasicAutenticationAttribute());
         }
