@@ -45,6 +45,7 @@ namespace WebApplicationAsp.net
             //config.Formatters.Insert(0,jsonpFormatter);
             //EnableCorsAttribute cors = new EnableCorsAttribute("*","*","*");
             //config.EnableCors(cors);
+            config.Filters.Add(new RequireHttpsAttribute());
         }
     }
 }
