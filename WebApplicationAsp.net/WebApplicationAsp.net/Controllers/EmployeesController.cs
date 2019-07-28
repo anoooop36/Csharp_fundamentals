@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using EmployeeDataAccess;
@@ -14,11 +15,14 @@ namespace WebApplicationAsp.net.Controllers
     {
         //HttpGet attribute to map method to Get verb
         [HttpGet]
+        [BasicAutentication]
         public HttpResponseMessage LoadAllEmployees(string gender="All")
         {
+            string userName = Thread.CurrentPrincipal.Identity.Name;
+
             using (EmployeeDBEntities entities = new EmployeeDBEntities())
             {
-                switch (gender.ToLower())
+                switch (userName.ToLower())
                 {
                     case "all":
                         return Request.CreateResponse(HttpStatusCode.OK, entities.Employees.ToList());
@@ -27,8 +31,7 @@ namespace WebApplicationAsp.net.Controllers
                     case "female":
                         return Request.CreateResponse(HttpStatusCode.OK, entities.Employees.Where(e => e.Gender.ToLower() == "female").ToList());
                     default:
-                        return Request.CreateErrorResponse(HttpStatusCode.BadRequest,
-                            "Value for gender must be male, female, all");
+                        return Request.CreateResponse(HttpStatusCode.BadRequest);
                 }
             }
         }
