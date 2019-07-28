@@ -25,13 +25,41 @@
             $('#btnClear').click(function () {
                 ulEmployees.empty();
             });
+            $('#btnAuth').click(function () {
+                var username = $('#userName').val();
+                var password = $('#password').val();
+                $.ajax({
+                    type: 'GET',
+                    url: 'api/employees',
+                    dataType: 'json',
+                    headers: {
+                        'Authorization': 'Basic '+ btoa(username + ':'+ password)
+                    },
+                    success: function (data) {
+                        ulEmployees.empty();
+                        $.each(data, function (index, val) {
+                            var fullName = val.FirstName + ' ' + val.LastName;
+                            ulEmployees.append('<li>'+fullName+'</li>');
+                        });
+                    },
+                    complete: function (jqXHR) {
+                        if (jqXHR.status == '401') {
+                            ulEmployees.empty();
+                            ulEmployees.append('<li>'+jqXHR.status+':'+jqXHR.statusText+'</li>')
+                        }
+                    }
+                });
+            });
         });
     </script>
 </head>
 <body>
+    Username: <input type="text" id="userName" value="" />
+    Password: <input type="text" id="password" value="" />
+    <br />
+    <input id="btnAuth" type="button" value="Authenticate and get employees"/>
     <input id="btn" type="button" value="Get all employees" />
     <input id="btnClear" type="button" value="clear" />
-    <ul id="ulEmployees">     
-    </ul>
+    <ul id="ulEmployees"></ul>
 </body>
 </html>
