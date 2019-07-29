@@ -10,6 +10,8 @@
         <div class="well">
             <input id="btnLoadEmployees" class="btn btn-success"
                    type="button" value="Load Employees" />
+            <input id="btnLogoff" class="btn btn-success pull-right"
+                   type="button" value="Log off" />
         </div>
         <div id="divData" class="well hidden">
             <table class="table table-bordered" id="tblData">
@@ -61,6 +63,11 @@
             if (sessionStorage.getItem('accessToken') == null) {
                 window.location.href = "Login.html";
             }
+
+            $('#btnLogoff').click(function () {
+                sessionStorage.removeItem('accessToken');
+                window.location.href = "Login.html";
+            });
 
             $('#linkClose').click(function () {
                 $('#divError').hide('fade');
