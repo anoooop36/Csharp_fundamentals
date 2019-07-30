@@ -8,6 +8,7 @@ using WebApiAttributeRouting.Models;
 
 namespace WebApiAttributeRouting.Controllers
 {
+    [RoutePrefix("api/students")]
     public class StudentsController : ApiController
     {
         static List<Student> list = new List<Student>() {
@@ -27,12 +28,23 @@ namespace WebApiAttributeRouting.Controllers
             return list.Where(s => s.Id == id);
         }
 
-        [Route("api/students/{id}/course")]
+        [Route("{id}/course")]
         public string GetStudentCourses(int id)
         {
             if(list.Find(s => s.Id == id) != null)
                 return list.Find(s => s.Id == id).Course;
             return "couldnt find id";
+        }
+
+        [Route("~/api/teachers")]
+        public IEnumerable<Teacher> GetTeachers()
+        {
+            List<Teacher> teachers = new List<Teacher>() {
+                new Teacher(){ Id=1, Name="Vineeth"},
+                new Teacher(){ Id=2, Name="Vineeth1"},
+                new Teacher(){ Id=3, Name="Vineeth2"},
+            };
+            return teachers;
         }
     }
 }
