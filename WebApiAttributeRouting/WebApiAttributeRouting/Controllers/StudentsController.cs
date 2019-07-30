@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+
 using WebApiAttributeRouting.Models;
 
 namespace WebApiAttributeRouting.Controllers
@@ -18,14 +19,22 @@ namespace WebApiAttributeRouting.Controllers
             new Student{Name="pk3", Id=4, Course="compiler3" },
         };
 
+        [Route("")]
         public IEnumerable<Student> GetStudentsList()
         {
             return list.ToList();
         }
 
+        [Route("{id:int:min(1)}", Name = "GetStudentById")]
         public IEnumerable<Student> GetStudentById(int id)
         {
             return list.Where(s => s.Id == id);
+        }
+
+        [Route("{name:alpha}")]
+        public Student GetStudentByName(string name)
+        {
+            return list.FirstOrDefault(s => s.Name == name);
         }
 
         [Route("{id}/course")]
@@ -45,6 +54,15 @@ namespace WebApiAttributeRouting.Controllers
                 new Teacher(){ Id=3, Name="Vineeth2"},
             };
             return teachers;
+        }
+
+        [Route("")]
+        public HttpResponseMessage Post([FromBody] Student student)
+        {
+            list.Add(student);
+            var response = Request.CreateResponse(HttpStatusCode.Created);
+            response.Headers.Location = new Uri(Url.Link("GetStudentById", new { id = student.Id}));
+            return response;
         }
     }
 }
