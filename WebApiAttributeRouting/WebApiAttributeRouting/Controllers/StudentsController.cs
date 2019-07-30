@@ -20,15 +20,21 @@ namespace WebApiAttributeRouting.Controllers
         };
 
         [Route("")]
-        public IEnumerable<Student> GetStudentsList()
+        public IHttpActionResult GetStudentsList()
         {
-            return list.ToList();
+            return Ok(list);
         }
 
         [Route("{id:int:min(1)}", Name = "GetStudentById")]
-        public IEnumerable<Student> GetStudentById(int id)
+        public IHttpActionResult GetStudentById(int id)
         {
-            return list.Where(s => s.Id == id);
+            var student =  list.Where(s => s.Id == id);
+            if (student == null)
+                return NotFound();
+            else
+            {
+                return Ok(student);
+            }
         }
 
         [Route("{name:alpha}")]
