@@ -17,11 +17,13 @@ namespace WebApiVersioning.Controllers
             new StudentV1() {Id = 3, Name="Tony"},
         };
 
+        [Route("api/v1/student")]
         public IEnumerable<StudentV1> Get()
         {
             return students;
         }
 
+        [Route("api/v1/student/{id}")]
         public StudentV1 Get(int id)
         {
             return students.FirstOrDefault(s => s.Id == id);
