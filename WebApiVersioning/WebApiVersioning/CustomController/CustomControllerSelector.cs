@@ -22,10 +22,15 @@ namespace WebApiVersioning.CustomController
             var routeData = request.GetRouteData();
             var controllerName = routeData.Values["controller"].ToString();
             string versioNumber = "1";
-            var versionQueryString = HttpUtility.ParseQueryString(request.RequestUri.Query);
-            if(versionQueryString["v"] != null)
+            //var versionQueryString = HttpUtility.ParseQueryString(request.RequestUri.Query);
+            //if(versionQueryString["v"] != null)
+            //{
+            //    versioNumber = versionQueryString["v"];
+            //}
+            string customHeader = "X-StudentService-Version";
+            if (request.Headers.Contains(customHeader))
             {
-                versioNumber = versionQueryString["v"];
+                versioNumber = request.Headers.GetValues(customHeader).FirstOrDefault();
             }
             if (versioNumber == "1")
             {
