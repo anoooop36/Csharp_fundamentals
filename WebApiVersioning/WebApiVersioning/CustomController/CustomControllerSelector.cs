@@ -27,10 +27,15 @@ namespace WebApiVersioning.CustomController
             //{
             //    versioNumber = versionQueryString["v"];
             //}
-            string customHeader = "X-StudentService-Version";
-            if (request.Headers.Contains(customHeader))
+            //string customHeader = "X-StudentService-Version";
+            //if (request.Headers.Contains(customHeader))
+            //{
+            //    versioNumber = request.Headers.GetValues(customHeader).FirstOrDefault();
+            //}
+            var acceptHeader = request.Headers.Accept.Where(a => a.Parameters.Count(p => p.Name.ToLower() == "version") > 0);
+            if (acceptHeader.Any())
             {
-                versioNumber = request.Headers.GetValues(customHeader).FirstOrDefault();
+                versioNumber = acceptHeader.First().Parameters.First(p => p.Name.ToLower() == "version").Value;
             }
             if (versioNumber == "1")
             {
