@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Dispatcher;
+using WebApiVersioning.CustomController;
 
 namespace WebApiVersioning
 {
@@ -20,11 +22,13 @@ namespace WebApiVersioning
             //    defaults: new { id = RouteParameter.Optional, controller = "StudentV1" }
             //);
 
-            //config.Routes.MapHttpRoute(
-            //    name: "Version2",
-            //    routeTemplate: "api/v2/student/{id}",
-            //    defaults: new { id = RouteParameter.Optional, controller = "StudentV2" }
-            //);
+            config.Services.Replace(typeof(IHttpControllerSelector),new CustomControllerSelector(config));
+
+            config.Routes.MapHttpRoute(
+                name: "Deafualt",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional}
+            );
         }
     }
 }
